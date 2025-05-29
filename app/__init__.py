@@ -31,6 +31,7 @@ def create_app():
     from app.routes.auth_routes import auth_bp
     from app.routes.dashboard_routes import dashboard_bp
     from app.command.create_admin import create_admin
+    from app.routes.home_routes import home_bp
     from app.ml.capstone import ml_bp
 
     app.cli.add_command(create_admin)
@@ -39,6 +40,7 @@ def create_app():
     app.register_blueprint(cart_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(home_bp)
     app.register_blueprint(ml_bp)
 
     
