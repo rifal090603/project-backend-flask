@@ -12,7 +12,7 @@ dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 # GET dashboard/
 @dashboard_bp.route('/', methods=['GET'])
-@cross_origin(origin='http://localhost:3000', supports_credentials=True)
+@cross_origin(supports_credentials=True)
 @jwt_required()
 def dashboard_main_app():
     data, error, status = dashboard_controller.dashboard_data()
@@ -42,7 +42,7 @@ def dashboard_main_app():
 
 # GET dashboard/users
 @dashboard_bp.route('/users', methods=['GET'])
-@cross_origin(origin='http://localhost:3000', supports_credentials=True)
+@cross_origin(supports_credentials=True)
 @jwt_required()
 def get_users_admin():
     admins, clients, error, status = dashboard_controller.get_user_data()
@@ -74,7 +74,7 @@ def get_transactions_admin():
 
 @dashboard_bp.route('/create-menu', methods=['POST'])
 @jwt_required()
-@cross_origin(origins='http://localhost:3000', supports_credentials=True)
+@cross_origin(supports_credentials=True)
 def create_menu_admin():
     # Ambil user_id dari JWT
     user_id = get_jwt_identity()
@@ -93,7 +93,7 @@ def create_menu_admin():
 # PUT update menu
 @dashboard_bp.route('/edit-menu/<int:menu_id>', methods=['PUT'])
 @jwt_required()
-@cross_origin(origins='http://localhost:3000', supports_credentials=True)
+@cross_origin(supports_credentials=True)
 def edit_menu_admin(menu_id):
     
     return menu_controller.update_menu(menu_id)
