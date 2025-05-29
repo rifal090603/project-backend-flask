@@ -39,7 +39,7 @@ def add_to_cart():
 
 # Remove item from cart (DELETE)
 @cart_bp.route('/remove/<string:menu_id>', methods=['DELETE'])
-@jwt_required()  # Ganti dengan JWT
+@jwt_required() 
 def remove_from_cart(menu_id):
     current_user_id = get_jwt_identity()
     try:
@@ -50,14 +50,14 @@ def remove_from_cart(menu_id):
 
 # Checkout (POST)
 @cart_bp.route('/checkout', methods=['POST'])
-@jwt_required()  # Ganti dengan JWT
+@jwt_required() 
 def checkout():
     current_user_id = get_jwt_identity()
     return cart_controller.checkout(current_user_id) 
 
 # Checkout Success (GET)
 @cart_bp.route('/checkout-success/<string:transaction_id>', methods=['GET'])
-@jwt_required()  # Ganti dengan JWT
+@jwt_required() 
 def checkout_success(transaction_id):
     transaction = Transaction.query.get(transaction_id)
 
@@ -73,7 +73,7 @@ def checkout_success(transaction_id):
 
 # Payment page (GET)
 @cart_bp.route('/payment/<string:transaction_id>', methods=['GET'])
-@jwt_required()  # Ganti dengan JWT
+@jwt_required() 
 def payment_page(transaction_id):
     return jsonify({
         'message': 'Silakan lakukan pembayaran ke DANA',

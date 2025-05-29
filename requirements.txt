@@ -27,7 +27,6 @@ dill==0.3.8
 dnspython==2.7.0
 eventlet==0.39.1
 filelock==3.18.0
-firebase-admin==6.8.0
 Flask==3.1.0
 Flask-Bcrypt==1.0.1
 flask-cors==5.0.1
@@ -46,18 +45,6 @@ geographiclib==2.0
 geopy==2.4.1
 gitdb==4.0.12
 GitPython==3.1.44
-google==3.0.0
-google-api-core==2.25.0rc1
-google-api-python-client==2.169.0
-google-auth==2.40.1
-google-auth-httplib2==0.2.0
-google-cloud-core==2.4.3
-google-cloud-firestore==2.20.2
-google-cloud-storage==3.1.0
-google-crc32c==1.7.1
-google-pasta==0.2.0
-google-resumable-media==2.7.2
-googleapis-common-protos==1.70.0
 greenlet==3.2.2
 grpcio==1.71.0
 grpcio-status==1.71.0
@@ -104,10 +91,7 @@ packaging==24.2
 pandas==2.2.3
 pillow==11.0.0
 propcache==0.3.1
-proto-plus==1.26.1
 protobuf==5.29.4
-psycopg2==2.9.10
-psycopg2-binary==2.9.10
 pusher==3.3.3
 PyJWT==2.10.1
 PyMySQL==1.1.1
