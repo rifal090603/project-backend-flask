@@ -13,9 +13,9 @@ def create_app():
 
     # Konfigurasi tambahan
     app.config.update(
-        SECRET_KEY=os.getenv("SECRET_KEY"),  # dari .env
+        SECRET_KEY=os.getenv("SECRET_KEY"),  
         SESSION_COOKIE_SAMESITE='None',
-        SESSION_COOKIE_SECURE=False,  # Ganti True di production (HTTPS)
+        SESSION_COOKIE_SECURE=False,  
     )
 
     # Inisialisasi ekstensi
@@ -32,7 +32,7 @@ def create_app():
     from app.routes.dashboard_routes import dashboard_bp
     from app.command.create_admin import create_admin
     from app.routes.home_routes import home_bp
-    from app.ml.capstone import ml_bp
+    # from app.ml.capstone import ml_bp
 
     app.cli.add_command(create_admin)
 
@@ -41,7 +41,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(home_bp)
-    app.register_blueprint(ml_bp)
+    # app.register_blueprint(ml_bp)
 
     
     from app.socket import event

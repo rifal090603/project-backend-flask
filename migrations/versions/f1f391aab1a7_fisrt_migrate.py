@@ -1,8 +1,8 @@
-"""fisrt baru
+"""fisrt migrate
 
-Revision ID: ec4bf3f11e38
+Revision ID: f1f391aab1a7
 Revises: 
-Create Date: 2025-05-22 11:45:06.122652
+Create Date: 2025-05-29 19:25:29.009201
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ec4bf3f11e38'
+revision = 'f1f391aab1a7'
 down_revision = None
 branch_labels = None
 depends_on = None
