@@ -35,5 +35,5 @@ class User(UserMixin, db.Model):
     # Menambahkan metode untuk menghasilkan JWT
     def generate_jwt(self):
         # Token valid untuk 15 menit (misalnya)
-        expires = timedelta(days=15)
+        expires = timedelta(days=2)
         return create_access_token(identity=self.id, expires_delta=expires)
