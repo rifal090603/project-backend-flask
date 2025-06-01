@@ -8,6 +8,11 @@ from datetime import datetime
 from app.models.auth_models import User
 from app import db
 import uuid
+import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def add_to_cart(user_id):
     data = request.get_json()
@@ -178,7 +183,28 @@ def checkout(user_id):
             'price': item.menu.harga
         })
 
-    db.session.commit()
+        db.session.commit()
+
+    # Notifikasi Telegram (tanpa emoji)
+    item_lines = '\n'.join([
+        f"- {it['product_name']} x{it['quantity']} @ Rp{it['price']:,}"
+        for it in items_response
+    ])
+
+    notif_message = (
+        f"Pesanan Baru Masuk\n\n"
+        f"Nama: {client_name}\n"
+        f"No. WA: {phone_number or '-'}\n"
+        f"Tipe Pesanan: {order_type.capitalize()}\n"
+        f"Total: Rp{total:,}\n"
+        f"Metode Pembayaran: {payment_method.upper()}\n"
+        f"Waktu Ambil: {pickup_datetime.strftime('%Y-%m-%d %H:%M') if pickup_datetime else '-'}\n"
+        f"Alamat: {alamat if alamat else '-'}\n"
+        f"No Meja: {no_meja if no_meja else '-'}\n\n"
+        f"Rincian Pesanan:\n{item_lines}"
+    )
+
+    send_telegram_message(notif_message)
 
     return jsonify({
         'message': 'Checkout berhasil',
@@ -189,3 +215,20 @@ def checkout(user_id):
         'pickup_datetime': pickup_datetime.strftime('%Y-%m-%d %H:%M') if pickup_datetime else None,
         'items': items_response
     }), 201
+    
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+
+def send_telegram_message(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        'chat_id': TELEGRAM_CHAT_ID,
+        'text': message,
+        'parse_mode': 'Markdown'  
+    }
+    try:
+        response = requests.post(url, json=payload)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Telegram notification error: {e}")
