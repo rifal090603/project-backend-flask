@@ -105,17 +105,9 @@ def checkout(user_id):
     elif order_type == 'delivery':
         if not phone_number:
             return jsonify({'message': 'Nomor WhatsApp wajib diisi untuk delivery'}), 400
+        
         if not alamat:
             return jsonify({'message': 'Alamat wajib diisi untuk delivery'}), 400
-        # Untuk delivery, pickup_date dan pickup_time tidak wajib karena pengiriman, tapi bisa kamu sesuaikan
-        # Jika memang butuh pickup_datetime, aktifkan validasi di bawah ini, jika tidak bisa dihapus:
-        # if not pickup_date or not pickup_time:
-        #     return jsonify({'message': 'Tanggal dan jam ambil wajib diisi untuk delivery'}), 400
-        # else:
-        #     try:
-        #         pickup_datetime = datetime.strptime(f"{pickup_date} {pickup_time}", "%Y-%m-%d %H:%M")
-        #     except ValueError:
-        #         return jsonify({'message': 'Format tanggal/waktu pengambilan tidak valid'}), 400
         
         if payment_method != 'dana':
             return jsonify({'message': 'Metode pembayaran untuk delivery harus DANA'}), 400
@@ -185,7 +177,7 @@ def checkout(user_id):
 
         db.session.commit()
 
-    # Notifikasi Telegram (tanpa emoji)
+    # Notifikasi Telegram 
     item_lines = '\n'.join([
         f"- {it['product_name']} x{it['quantity']} @ Rp{it['price']:,}"
         for it in items_response
