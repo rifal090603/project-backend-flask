@@ -59,6 +59,10 @@ TELEGRAM_CHAT_ID=7921374299
 
 UPLOAD_FOLDER = app/static/upload
 ```
+## Create Admin
+- flask create-admin
+- ikuti saja intruksi yang diberikan
+
 
 ## Sistem Rekomendasi
 
