@@ -40,7 +40,6 @@ Ini adalah backend untuk aplikasi **Coffee Macth**, dibangun dengan Flask dan me
 > Secara default akan berjalan di `http://localhost:5000`
 
 ## File .env
-
 ```bash
 FLASK_APP = run.py
 FLASK_ENV = development
@@ -56,8 +55,15 @@ DB_PASSWORD=12345
 TELEGRAM_BOT_TOKEN=7680731850:AAGABdH_thqfencqR4vGFphBf3-XjWSbpYI
 TELEGRAM_CHAT_ID=7921374299
 
-
 UPLOAD_FOLDER = app/static/upload
+```
+## Migartion
+- Setelah buat database mysql jalankan peintah:
+- Sebelum jalankan preintah dibawah sebaiknya anda berikan komentar pada from app.ml.capstone import ml_bp dan app.register_blueprint(ml_bp) pada file __init__.py yang ada pada folder app agar proses migrate lebih cepat
+```bash
+flask db init
+flask db migrate -m "Fisrt migrate"
+flask db upgrade
 ```
 ## Create Admin
 - flask create-admin
@@ -81,9 +87,10 @@ UPLOAD_FOLDER = app/static/upload
 
 import data csv ke database:
 
-1. Buat database mysql dengan mengikuti file .env.
-2. Jalankan script berikut di Python untuk memasukkan data ke database:
+- Buat database mysql dengan mengikuti file .env.
+- Jalankan script berikut di Python untuk memasukkan data ke database:
 
 ```bash
 python import_data.py
 ```
+- setelah export data csv ke database buka kembali komentar pada file __init__.py yang ada buat di atas 
